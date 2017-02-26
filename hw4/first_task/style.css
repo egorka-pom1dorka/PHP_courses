@@ -1,0 +1,13 @@
+form{
+	display: table;
+}
+label{
+	display: table-row;
+	margin-top: 10px;
+}
+span{
+	display: table-cell;
+}
+input{
+	display: table-cell;
+}
