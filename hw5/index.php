@@ -1,24 +1,32 @@
-<!-- <?php header("Content-Type: text/html;charset=UTF-8"); ?> -->
+<?php header("Content-Type: text/html;charset=UTF-8"); ?>
 <?php
-
-	// $phone=trim($_GET["phone"]);
-	// $exp="/([375\+]{3,4})\s*\-*(\d{2})\-*\s*(\d{2})\-*\s*(\d{2})\-*\s*(\d{3})/";
-	// $matches = array();
-	// preg_match_all($exp, $phone, $matches);
+	// if (isset($_GET["phone"])) {
+	// 	$phone=trim($_GET["phone"]);
+	// 	$exp="/(\+?375)\s*\-*(\d{2})\-*\s*(\d{2,3})\-*\s*(\d{2})\-*\s*(\d{2,3})/";
+	// 	$matches = array();
+	// 	preg_match_all($exp, $phone, $matches);
+	// 	echo $matches[1][0]."-".$matches[2][0]."-".$matches[3][0]."-".$matches[4][0]."-".$matches[5][0];
+	// }
 
 	// //////////////////////////////////////
 
-	// $adress=trim($_GET["adress"]);
-	// $pattern="/([httpswf]{2,5})\:\/\/([A-Za-z0-9]{3,})\.*([a-z]*)\.([a-z]{2,})\/*([A-Za-z0-9\/]*)\/*\?*([\w\=\-\+\&\%]*)\#*(\w*)/";
-	// $arr = array();
-	// preg_match_all($pattern, $adress, $arr);
+	if (isset($_GET["adress"])) {
+		$adress=trim($_GET["adress"]);
+		$pattern="/(http|https|ws|ftp)\:\/\/([A-Za-z0-9]{3,})\.*([a-z]*)\.([a-z]{2,})\/*([A-Za-z0-9\/]*)\/*\?*([\w\=\-\+\&\%]*)\#*(\w*)/";
+		$arr = array();
+		preg_match_all($pattern, $adress, $arr);
+		if ($arr[1][0]!=NULL) {
+			echo Yes;
+		}
+		else echo No;
+	}
 
-	//////////////////////////////////////
+	// //////////////////////////////////////
 
-	$file=file_get_contents("http://www.anaga.ru/goroda.htm");
-	$search="/<td>(.*)<\/td>/Uims";
-	$arrayName = array();
-	preg_match_all($search, $file, $arrayName);
+	// $file=file_get_contents("http://www.anaga.ru/goroda.htm");
+	// $search="/<td>(.*)<\/td>/Uims";
+	// $arrayName = array();
+	// preg_match_all($search, $file, $arrayName);
 
 ?>
 <!DOCTYPE html>
@@ -34,20 +42,14 @@
 			<input type="tel" name="phone" required="">
 		</label>
 		<input type="submit">
-	</form>
-	<pre><?php
-		print_r($matches);
-	?></pre> -->
-	<!-- <form method="GET">
+	</form> -->
+	<form method="GET">
 		<label>
 			<span>Write URL</span>
 			<input type="text" name="adress">
 		</label>
 		<input type="submit">
 	</form>
-	<pre><?php
-		print_r($arr);
-	?></pre> -->
-	<xmp><?php print_r($arrayName); ?></xmp>
+	<!-- <xmp><?php print_r($arrayName); ?></xmp> -->
 </body>
 </html>
