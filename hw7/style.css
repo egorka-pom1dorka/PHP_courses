@@ -1,0 +1,25 @@
+body, p{
+	margin: 0 auto;
+}
+h1{
+	text-align: center;
+}
+input, p, button{
+	margin-top: 10px;
+}
+a{
+	color: black;
+	text-decoration: none;
+}
+input, button{
+	padding: 5px;
+}
+label, input{
+	display: block;
+}
+main{
+	margin-left: 44%;
+}
+::-webkit-input-placeholder{
+	color: black;
+}
