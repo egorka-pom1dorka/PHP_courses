@@ -3,10 +3,9 @@
 	ini_set('display_errors','Off');
 	error_reporting('E_ALL');
 	$str=trim($_GET["query"]);
-	$check=strtoupper($str);
-	$link=mysqli_connect("localhost","user","hedogo51","databuse");
-	if(isset($str) && strpos($check, "SELECT") === 0){
-		$data=mysqli_query($link,$str);
+	$link=mysqli_connect("localhost","host1316886_ul","g62YH9nn","host1316886_db1");
+	if(isset($str)){
+		$data=mysqli_query($link, $str);
 		$res = array();
 		while ($temp = mysqli_fetch_assoc($data)) {
 			$res[]=$temp;
