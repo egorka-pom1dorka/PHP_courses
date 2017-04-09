@@ -1,0 +1,13 @@
+SELECT COUNT(id) FROM employees WHERE children IN(0,1,2) AND job="Фельдшер"
+SELECT AVG(age) FROM employees WHERE job="Педагог"
+SELECT COUNT(id)+SUM(children) FROM employees
+SELECT COUNT(id),job FROM employees GROUP BY job ORDER BY COUNT(id) DESC
+SELECT COUNT(job),job FROM employees WHERE job IN("Хирург", "Акушер", "Сантехник", "Фельдшер") AND children IN(0,1,2) GROUP BY job
+SELECT COUNT(id),city,MIN(age),MAX(age) FROM employees GROUP BY city ORDER BY COUNT(id) DESC
+SELECT COUNT(id),AVG(age) FROM employees WHERE balance>=10000 AND balance<=99999
+SELECT COUNT(id),age FROM employees WHERE children=0 GROUP BY age ORDER BY COUNT(id) DESC LIMIT 1
+SELECT job,AVG(balance) FROM employees GROUP BY job ORDER BY AVG(balance) DESC LIMIT 1
+SELECT AVG(a) FROM (SELECT job,AVG(balance) AS a FROM employees GROUP BY job) AS `table`
+SELECT 1/AVG(1/age) FROM employees 
+SELECT job,age,COUNT(age) FROM employees GROUP BY job,age ORDER BY COUNT(age) DESC
+SELECT * FROM employees WHERE city=(SELECT city FROM(SELECT AVG(age),COUNT(city) AS a, city FROM employees GROUP BY city ORDER BY AVG(age) DESC) AS  `table` WHERE a>=2 LIMIT 1)
