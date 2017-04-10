@@ -1,2 +1,4 @@
 RewriteEngine On
 RewriteRule ^categories/(.*)$ indexCategory.php?url=$1 [L]
+RewriteRule ^articles/(.*)$ indexArticle.php?url=$1 [L]
+RewriteRule ^tags/(.*)$ indexTag.php?url=$1 [L]

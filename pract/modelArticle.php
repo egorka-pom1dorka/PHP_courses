@@ -6,17 +6,18 @@
 	{
 		public function getArticle($url)
 		{
-			$link = mysqli_connect("localhost","root","","news");
+			$link = mysqli_connect("localhost","host1316886_u1","g62YH9nn","host1316886_db1");
 			$data = mysqli_query($link, "SELECT * FROM articles WHERE url=\"$url\"");
 			while ($temp = mysqli_fetch_assoc($data)) {
 				$results[] = new article\Article($temp['id'], $temp['categories_id'], $temp['content'], $temp['date'], $temp['views'], $temp['img'], $temp['url'], $temp['name']);
 			}
+			$results = $results[0];
 			return $results;
 		}
 
 		public function getTags($art)
 		{
-			$link = mysqli_connect("localhost","root","","news");
+			$link = mysqli_connect("localhost","host1316886_u1","g62YH9nn","host1316886_db1");
 			$a = $art->getId();
 			$tags_id = array();
 			$results = array();
@@ -35,7 +36,7 @@
 
 		public function getSortArticles()
 		{
-			$link = mysqli_connect("localhost","root","","news");
+			$link = mysqli_connect("localhost","host1316886_u1","g62YH9nn","host1316886_db1");
 			$data = mysqli_query($link, "SELECT * FROM articles ORDER BY views DESC");
 			while ($temp = mysqli_fetch_assoc($data)) {
 				$results[] = new article\Article($temp['id'], $temp['categories_id'], $temp['content'], $temp['date'], $temp['views'], $temp['img'], $temp['url'], $temp['name']);
@@ -45,19 +46,19 @@
 
 		public function addView($art)
 		{
-			$link = mysqli_connect("localhost","root","","news");
+			$link = mysqli_connect("localhost","host1316886_u1","g62YH9nn","host1316886_db1");
 			$id = $art->getId();
 			$data = mysqli_query($link, "UPDATE articles SET views=views+1 WHERE id=$id");
 		}
 
 		public function getCat($art)
 		{
-			$link = mysqli_connect("localhost","root","","news");
+			$link = mysqli_connect("localhost","host1316886_u1","g62YH9nn","host1316886_db1");
 			$id = $art->getCategories_id();
 			$data = mysqli_query($link, "SELECT title FROM categories WHERE id=$id");
-			while ($temp = mysqli_fetch_assoc($data)) {
-				$results[] = $temp['title'];
-			}
+			$temp = mysqli_fetch_assoc($data);
+			$results = $temp['title'];
+			
 			return $results;
 		}
 	}

@@ -1,0 +1,81 @@
+body, ul{
+	margin: 0 auto;
+	padding: 0;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+a:hover{
+	text-decoration: underline;
+}
+li{
+	list-style: none;
+}
+
+/*HEADER*/
+.header{
+	position: fixed;
+	float: left;
+	width: 100%;
+	background-color: #508AA5;
+}
+.header > li{
+	background-color: #508AA5;
+	padding: 10px;
+	display: inline-block;
+}
+.header > li:hover{
+	background-color: #A3BFCC;
+}
+.header > li > a{
+	color: #FFD373;
+}
+
+/*ASIDE*/
+.aside{
+	background-color: #FFD373;;
+	clear: both;
+	position: fixed;
+	height: 100%;
+	margin-top: 38px;
+	
+}
+.aside > li{
+	padding-left: 25px;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+}
+.aside > li:hover{
+	background-color: #FFC440;
+}
+.aside > li > a{
+	color: #508AA5;
+}
+
+/*MAIN*/
+main{
+	padding-top: 40px;
+	padding-left: 120px;
+}
+img{
+	float: left;
+	height: 132px;
+	padding-right: 15px;
+}
+
+
+.article > img{
+	height: 240px;
+	padding-bottom: 200px;
+}
+.content{
+	font-size: 18px;
+}
+.path{
+	font-size: 17px;
+}
+.article{
+	margin-right: 10px;
+}

@@ -2,27 +2,43 @@
 <?php 
 	require_once("modelArticle.php");
 	require_once("modelCategory.php");
+	require_once("modelTag.php");
 	$artModel = new ArticleModel();
 	$content="";
+	$aside = "";
 	$popularArticle = $artModel->getSortArticles();
 	$tags = array();
 	$categories = array();
 
+	//////////////////////////////Контент страницы 
 	for ($i=0; $i < count($popularArticle); $i++) { 
 		foreach ($artModel->getTags($popularArticle[$i]) as $key => $value) {
-			$tags[] = $value;
+			$tags[] = "<a href='/tags/{$value}'>".$value."</a>";
 			$t = implode("; ", $tags);
 		}
-		foreach ($artModel->getCat($popularArticle[$i]) as $key => $value) {
-			$categories[] = $value;
-			$c = implode("; ", $categories);
-		}
-		$content .= "<div><img height='180px' src='{$popularArticle[$i]->getimg()}'><h3>".$popularArticle[$i]->getName()."</h3><p>".$popularArticle[$i]->getContent()."</p><p>".$c."</p><p>".$t."</p><p>".$popularArticle[$i]->getViews()."</p></div>";
+		$c = $artModel->getCat($popularArticle[$i]);
+			
+		$content .= "<div><img src='{$popularArticle[$i]->getimg()}'><h2><a href='/articles/{$popularArticle[$i]->getUrl()}'>".$popularArticle[$i]->getName()."</a></h2><p>Category: <b><a href='/categories/{$c}'>".$c."</a></b></p><p>Tags: <i>".$t."</i></p><p>Views: ".$popularArticle[$i]->getViews()."</p><p>".$popularArticle[$i]->getDate()."</p></div>";
 		$tags = array();
-		$categories = array();
 	}
 
-	
+	///////////////////////////////Список всех тегов
+	$modelTAG = new TagModel();
+	$alltags = $modelTAG->getAllTags();
+
+	for ($i=0; $i < count($alltags); $i++) { 
+		$aside .= "<li><a href='/tags/{$alltags[$i]->getUrl()}'>".$alltags[$i]->getName()."</a></li>";
+	}
+
+	///////////////////////////////Хедер со всеми категориями
+	$categModel = new CategoryModel;
+	$allCat = $categModel->getAllCategories();
+	$header = "<li><a href='/'>Main</a></li>";
+
+	for ($i=0; $i < count($allCat); $i++) { 
+		$header .= "<li><a href='/categories/{$allCat[$i]->getUrl()}'>".$allCat[$i]->getTitle()."</a></li>";
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +46,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<?=$content ?>
+	<header>
+		<ul class = 'header'>
+			<?=$header ?>
+		</ul>
+	</header>
+	<aside>
+		<ul class="aside">
+			<?=$aside ?>			
+		</ul>
+	</aside>
+	<main>
+		<?=$content ?>
+	</main>
 </body>
 </html>
